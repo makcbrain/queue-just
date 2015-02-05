@@ -5,6 +5,8 @@
   "author": "Maxim Kadochnikov <makc.brain@yandex.ru>",
   "bin": "./index.js",
   "repository": {
-    "type": "git"
-  }
+    "type": "git",
+    "url": "https://github.com/makcbrain/queue-just"
+  },
+  "license": "MIT"
 }
