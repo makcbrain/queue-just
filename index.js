@@ -12,7 +12,8 @@ function Queue(options) {
   this.autostart = options.autostart ? options.autostart : false;
   this.timeout = options.timeout ? this.setTimeout(options.timeout) : 0;
   this.running = false;
-  this.callback=function(){};
+  this.callback = function () {
+  };
 }
 
 util.inherits(Queue, events.EventEmitter);
@@ -31,37 +32,40 @@ Queue.prototype.add = function (task) {
 Queue.prototype.start = function (callback) {
   this.callback = callback || function () {
   };
-  if (!this.running && this.queue.length){
+  if (!this.running && this.queue.length) {
     this.emit('start');
     this.startTask();
   }
 };
 
-Queue.prototype.startTask = function(){
-  var self=this;
-  if(this.queue.length){
-    var task=this.queue.shift()
-    function next(err){
-      if(err) {
+Queue.prototype.startTask = function () {
+  this.running=true;
+  var self = this;
+  if (this.queue.length) {
+    var task = this.queue.shift();
+
+    function next(err) {
+      if (err) {
         self.emit('error', err);
-      }else{
+      } else {
         self.emit('success', task, [].slice.call(arguments));
       }
       self.startTask();
     }
+
     task(next);
-  }else{
+  } else {
     this.done();
   }
 };
 
-Queue.prototype.stop=function(){
-  this.running=false;
+Queue.prototype.stop = function () {
+  this.running = false;
   this.emit('stop');
 };
 
-Queue.prototype.done = function(){
-  this.running=false;
+Queue.prototype.done = function () {
+  this.running = false;
   this.emit('done');
   this.callback();
 };
