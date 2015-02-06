@@ -46,7 +46,7 @@ Queue.prototype.startTask = function () {
 
     function next(err) {
       if (err) {
-        self.emit('error', err);
+        self.emit('error', err, task);
       } else {
         self.emit('success', task, [].slice.call(arguments));
       }
