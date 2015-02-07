@@ -1,6 +1,6 @@
 {
   "name": "queue-just",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description" : "Module for simple queue-service",
   "author": "Maxim Kadochnikov <makc.brain@yandex.ru>",
   "bin": "./index.js",

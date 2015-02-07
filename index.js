@@ -14,6 +14,7 @@ function Queue(options) {
   this.running = false;
   this.callback = function () {
   };
+  this.processed_tasks=0;
 }
 
 util.inherits(Queue, events.EventEmitter);
@@ -45,6 +46,7 @@ Queue.prototype.startTask = function () {
     var task = this.queue.shift();
 
     function next(err) {
+      self.processed_tasks++;
       if (err) {
         self.emit('error', err, task);
       } else {
